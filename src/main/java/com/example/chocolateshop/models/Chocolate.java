@@ -1,2 +1,4 @@
-package com.example.chocolateshop.models;public class Chocolate {
+package com.example.chocolateshop.models;
+
+public class Chocolate {
 }

@@ -17,9 +17,7 @@ public class ChocolateController {
     }
     @GetMapping("/list")
     public String allChocolates(Model model){
-
         model.addAttribute("chocolateList", chocolateService.chocolateList());
-        model.addAttribute("images"
         return "candy/chocolateList";
     }
     @GetMapping("/add-candy")
@@ -29,11 +27,9 @@ public class ChocolateController {
 
     }
     @PostMapping
-    public String savingChocolate(@RequestParam("file1") MultipartFile file1,
-//                                  @RequestParam("file2") MultipartFile file2,
-//                                  @RequestParam("file3") MultipartFile file3,
+    public String savingChocolate(@RequestParam("file") MultipartFile file,
                                   Chocolate chocolate) throws Exception{
-        chocolateService.saveChocolate(chocolate, file1);
+        chocolateService.saveProductToBD(chocolate, file);
         return "redirect:/candy/list";
     }
 

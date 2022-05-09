@@ -22,18 +22,12 @@ public class Chocolate {
     private String name;
     private String description;
     private int price;
-    private int quantity;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-    mappedBy = "chocolates")
-    private List<Image> images = new ArrayList<>();
-    private int previewImageId;
-    private LocalDateTime dateOfCreated;
-    @PrePersist
-    private void init(){
-        dateOfCreated = LocalDateTime.now();
-    }
-    public void addImageToChocolate(Image image){
-        image.setChocolates(this);
-        images.add(image);
-    }
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name= "category_id")
+    private Category category;
+
+
 }

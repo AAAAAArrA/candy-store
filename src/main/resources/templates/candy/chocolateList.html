@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:columns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:columns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,14 +12,12 @@
 
 
     <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxfD8B0T90ZOJs970trPXimbCA-tycWK9N6QKV87K-yz8RfH4b_5G-gZ2KsvQDOfbCJuc&usqp=CAU"
-             alt="Avatar" style="width:30%">
         <div class="container" >
             <a th:href="@{chocolate/{id}(id=${I.getId()})}" th:text="${I.getName()}">Name</a>
             <br/>
             <a th:href="@{chocolate/{id}(id=${I.getId()})}" th:text="${I.getPrice()}">Price</a>
             <br/>
-            <img src="/images/${I.images.get(0)}" height="60px"/>
+            <img alt="" th:src="*{'data:image/jpeg;base64,'+{I.image}}" height="60px"/>
         </div>
     </div>
 
@@ -28,6 +26,6 @@
 </div>
 <br/>
 <hr/>
-<a href="candy/add-candy">Create new Chocolate</a>
+<a th:href="@{/candy/add-candy}">Create new Chocolate</a>
 </body>
 </html>

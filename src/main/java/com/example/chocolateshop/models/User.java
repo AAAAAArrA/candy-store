@@ -1,7 +1,6 @@
 package com.example.chocolateshop.models;
 
 import com.example.chocolateshop.enums.Roles;
-import com.example.chocolateshop.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +26,5 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Set<Roles> role = new HashSet<>();
     private String password;
-    @Enumerated(value = EnumType.STRING)
-    private Status status;
 
 }

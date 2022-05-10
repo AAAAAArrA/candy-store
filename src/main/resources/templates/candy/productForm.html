@@ -2,21 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Chocolate Form</title>
+    <title>product Form</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
 <div class="container text-center">
-    <div th:if="${chocolate.id == null}"><h1>Add new Employee</h1></div>
-    <div th:unless="${chocolate.id == null}"><h1>Edit Employee</h1></div>
-    <form th:method="POST" th:action="@{/candy/save}" th:object="${chocolate}" enctype="multipart/form-data"
+    <div th:if="${product.id == null}"><h1>Add new Employee</h1></div>
+    <div th:unless="${product.id == null}"><h1>Edit Employee</h1></div>
+    <form th:method="POST" th:action="@{/candy/save}" th:object="${product}" enctype="multipart/form-data"
           style="max-width: 600px; margin: 0 auto;">
-        <input type="hidden" th:field="*{id}" th:value="${chocolate.id}"/>
+        <input type="hidden" th:field="*{id}" th:value="${product.id}"/>
         <div class="m-3">
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Enter name</label>
                 <div class="col-sm-4">
-                    <input type="text" th:field="${chocolate.name}" class="form-control" required />
+                    <input type="text" th:field="${product.name}" class="form-control" required />
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Enter description:</label>
                 <div class="col-sm-4">
-                    <input type="text" th:field="${chocolate.description}" class="form-control" required />
+                    <input type="text" th:field="${product.description}" class="form-control" required />
                 </div>
             </div>
         </div>
@@ -32,11 +32,11 @@
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Enter price:</label>
                 <div class="col-sm-4">
-                    <input type="number" th:field="${chocolate.price}" class="form-control" required />
+                    <input type="number" th:field="${product.price}" class="form-control" required />
                 </div>
             </div>
         </div>
-        <div class="m-3" th:if="${chocolate.id == null}">
+        <div class="m-3">
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Select photo:</label>
                 <div class="col-sm-4">
@@ -44,19 +44,11 @@
                 </div>
             </div>
         </div>
-        <div th:unless="${chocolate.id == null}">
-            <div>
-                <img th:src="@{/images/{id}(id=${images.getId()})}" height="60px" />
-            </div>
-            <!--            <div th:each="I : ${images}">-->
-            <!--                <img th:src="@{/images/{id}(id=${I.getId()})}" height="60px" name="file"/>-->
-            <!--            </div>-->
-        </div>
         <div class="text-center p-3">
-            <div th:if="${chocolate.id == null}">
+            <div th:if="${product.id == null}">
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
-            <div th:unless="${chocolate.id == null}">
+            <div th:unless="${product.id == null}">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
 

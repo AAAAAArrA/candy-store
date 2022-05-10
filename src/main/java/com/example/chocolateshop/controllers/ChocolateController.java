@@ -15,23 +15,32 @@ public class ChocolateController {
     public ChocolateController(ChocolateService chocolateService) {
         this.chocolateService = chocolateService;
     }
-    @GetMapping("/list")
+    @GetMapping
     public String allChocolates(Model model){
         model.addAttribute("chocolateList", chocolateService.chocolateList());
         return "candy/chocolateList";
     }
     @GetMapping("/add-candy")
     public String createChocolate(Model model){
-        model.addAttribute("newCandy", new Chocolate());
-        return "candy/addChocolate";
+        model.addAttribute("product", new Chocolate());
+        return "candy/productForm";
 
     }
-    @PostMapping
+    @PostMapping("/save")
     public String savingChocolate(@RequestParam("file") MultipartFile file,
                                   Chocolate chocolate) throws Exception{
         chocolateService.saveProductToBD(chocolate, file);
-        return "redirect:/candy/list";
+        return "redirect:/candy";
     }
+    @GetMapping("/delete/{id}")
+    public String deleteChocolate(@PathVariable("id") int id){
+        chocolateService.deleteChocolate(id);
+        return "redirect:/candy";
+    }
+
+
+
+
 
 
 

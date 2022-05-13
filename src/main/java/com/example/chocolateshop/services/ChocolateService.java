@@ -32,17 +32,12 @@ public class ChocolateService {
 
 
     //УДАЛЯЕТ ШОКОЛАД ПО ID
-    public void deleteChocolate(int id){
+    public void deleteChocolate(Long id){
         chocolateRepository.deleteById(id);
     }
 
     //ДОСТАЕТ ОДИН ШОКОЛАД ПО ID
-    public Chocolate findChocolate(int id){
+    public Chocolate findChocolate(Long id){
         return chocolateRepository.findById(id).get();
     }
-
-
-
-
-
 }

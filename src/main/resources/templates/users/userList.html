@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:columns="http://www.w3.org/1999/xhtml"
+      xmlns:tr="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container text-center">
+    <div><h1>User List</h1></div>
+
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Full Name</th>
+                <th>email</th>
+                <th>role</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr:block>
+                <tr th:each="I : ${user}">
+                    <td th:text="${I.fullName}"></td>
+                    <td th:text="${I.email}"></td>
+                    <td th:text="${I.role}"></td>
+                    <td>
+                        <a th:href="@{'/users/delete/' + ${I.id}}">Delete</a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/users/edit/' + ${I.id}}">Update</a>
+                    </td>
+                </tr>
+            </tr:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

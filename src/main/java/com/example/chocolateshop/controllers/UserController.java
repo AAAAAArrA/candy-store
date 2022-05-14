@@ -3,6 +3,7 @@ package com.example.chocolateshop.controllers;
 
 import com.example.chocolateshop.dto.UserDTO;
 import com.example.chocolateshop.repositories.UserRepository;
+import com.example.chocolateshop.services.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserServiceImpl userRepository;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserServiceImpl userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @GetMapping
+    public String userList(Model model){
+        model.addAttribute("user", userRepository.allUsers());
+        return "users/userList";
+
     }
 
     @GetMapping("/new")
@@ -26,8 +34,8 @@ public class UserController {
 
     @PostMapping("/new")
     public String saveUser(UserDTO userDTO, Model model){
-        if(userRepository.save(userDTO)){
-            return "redirect:/";
+        if(userRepository.saveClient(userDTO)){
+            return "redirect:/users";
         }else {
             model.addAttribute("user", userDTO);
             return "users/userForm";

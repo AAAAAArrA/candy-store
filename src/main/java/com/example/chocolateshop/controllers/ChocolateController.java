@@ -37,7 +37,7 @@ public class ChocolateController {
         chocolateService.saveProductToBD(chocolate, file);
         return "redirect:/candy";
     }
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteChocolate(@PathVariable("id") Long id){
         chocolateService.deleteChocolate(id);
         return "redirect:/candy";

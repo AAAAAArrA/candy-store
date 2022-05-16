@@ -30,12 +30,4 @@ public class Chocolate {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
-
-
-
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name= "category_id")
-//    private Category category;
-
-
 }

@@ -3,33 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Candy Shop</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
 <div class="container text-center">
-<form th:action="@{/auth}" method="POST">
-    <div class="m-3">
-        <div class="form-group row">
-            <label class="col-form-label col-sm-4">Enter username</label>
-            <div class="col-sm-4">
-                <input type="text" name="username" class="form-control" required />
+    <form th:action="@{/auth}" method="POST">
+        <div th:if="${loginError}" class="error">Wrong username or password</div>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Enter username</label>
+                <div class="col-sm-4">
+                    <input type="text" name="username" class="form-control" required/>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="m-3">
-        <div class="form-group row">
-            <label class="col-form-label col-sm-4">Enter password</label>
-            <div class="col-sm-4">
-                <input type="text" name="password" class="form-control" required />
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Enter password</label>
+                <div class="col-sm-4">
+                    <input type="password" name="password" class="form-control" required/>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="text-center p-3">
-        <div >
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="text-center p-3">
+            <div>
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
         </div>
-    </div>
-
-</form>
+    </form>
 </div>
 </body>
 </html>

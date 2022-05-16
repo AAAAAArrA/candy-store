@@ -19,7 +19,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String fullName;
     private String email;
     @Enumerated(EnumType.STRING)
@@ -28,5 +28,4 @@ public class User {
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "bucket_ID")
     private Bucket bucket;
-
 }

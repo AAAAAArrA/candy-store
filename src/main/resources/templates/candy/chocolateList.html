@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:tr="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div th:insert="~{menu.html :: nav-menu}"></div>
 <div class="container text-center">
     <div><h1>Products</h1></div>
-    <div sec:authorize="hasAuthority('PRODUCTS_WRITE')"><h2><a th:href="@{/candy/add-candy}">Add new Product</a></h2></div>
+    <div>
+        <h2 sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/candy/add-candy}">Add new Product</a></h2>
+    </div>
+
+<!--    <sec:authorize access="hasRole('MANAGER')">-->
+<!--        <div><h2><a th:href="@{/candy/add-candy}">Add new Product</a></h2></div>-->
+<!--    </sec:authorize>-->
     <div>
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -18,8 +25,12 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th sec:authorize="hasRole('MANAGER')"></th>
-                <th sec:authorize="hasRole('MANAGER')"></th>
+                <div sec:authorize="hasAnyAuthority('products:write')">
+                    <th></th>
+                    <th></th>
+                </div>
+
+
             </tr>
             </thead>
             <tbody>
@@ -31,12 +42,13 @@
                     <td th:text="${I.name}"></td>
                     <td th:text="${I.description}"></td>
                     <td th:text="${I.price}"></td>
-                    <td sec:authorize="hasRole('MANAGER')">
+                    <td sec:authorize="hasAnyAuthority('products:write')">
                         <a th:href="@{'/candy/delete/' + ${I.id}}">Delete</a>
                     </td>
-                    <td sec:authorize="hasRole('MANAGER')">
+                    <td sec:authorize="hasAnyAuthority('products:write')">
                         <a th:href="@{'/candy/edit/' + ${I.id}}">Update</a>
                     </td>
+
                 </tr>
             </tr:block>
             </tbody>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
+<div th:insert="~{menu.html :: nav-menu}"></div>
 <div class="container text-center">
     <div th:if="${product.id == null}"><h1>Add new Product</h1></div>
     <div th:unless="${product.id == null}"><h1>Edit Product</h1></div>

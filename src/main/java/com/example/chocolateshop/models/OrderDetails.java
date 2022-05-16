@@ -24,5 +24,4 @@ public class OrderDetails {
     private Chocolate chocolate;
     private BigDecimal amount;
     private BigDecimal price;
-
 }

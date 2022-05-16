@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByFullName(String fullName);
-    boolean save(UserDTO userDTO);
+
 }

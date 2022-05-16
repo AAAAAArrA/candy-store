@@ -1,5 +1,6 @@
 package com.example.chocolateshop.services;
 
+import com.example.chocolateshop.mapper.ProductMapper;
 import com.example.chocolateshop.models.Chocolate;
 import com.example.chocolateshop.repositories.ChocolateRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import java.util.List;
 @Slf4j
 public class ChocolateService {
     private final ChocolateRepository chocolateRepository;
+    private final ProductMapper productMapper = ProductMapper.MAPPER;
     public ChocolateService(ChocolateRepository chocolateRepository) {
 
         this.chocolateRepository = chocolateRepository;

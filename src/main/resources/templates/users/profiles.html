@@ -8,51 +8,46 @@
 <body>
 <div th:insert="~{menu.html :: nav-menu}"></div>
 <div class="container text-center">
-    <form th:method="POST" th:action="@{/users/new}" th:object="${user}" enctype="multipart/form-data"
+    <form th:method="POST" th:action="@{/users/profile}" th:object="${user}" enctype="multipart/form-data"
           style="max-width: 600px; margin: 0 auto;">
         <div class="m-3">
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Enter Name</label>
+                <label class="col-form-label col-sm-4">Name</label>
                 <div class="col-sm-4">
-                    <input type="text" th:field="${user.userName}" class="form-control" required />
+                    <input type="text" th:field="*{userName}" class="form-control" required />
                 </div>
             </div>
         </div>
         <div class="m-3">
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Enter password:</label>
+                <label class="col-form-label col-sm-4">email:</label>
                 <div class="col-sm-4">
-                    <input type="text" th:field="${user.password}" class="form-control" required />
+                    <input type="text" th:field="*{email}" class="form-control" required />
                 </div>
             </div>
         </div>
         <div class="m-3">
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Enter Matching password:</label>
+                <label class="col-form-label col-sm-4">password:</label>
                 <div class="col-sm-4">
-                    <input type="text" th:field="${user.passwordMatching}" class="form-control" required />
+                    <input type="password" th:field="*{password}" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="m-3">
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Enter email:</label>
+                <label class="col-form-label col-sm-4">Matching password:</label>
                 <div class="col-sm-4">
-                    <input type="text" th:field="${user.email}" class="form-control" required />
+                    <input type="password" th:field="*{passwordMatching}" class="form-control" />
                 </div>
             </div>
         </div>
-
         <div class="text-center p-3">
             <div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </form>
-
-</div>
-
-
 </div>
 </body>
 </html>

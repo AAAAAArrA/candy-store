@@ -13,10 +13,6 @@
     <div>
         <h2 sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/candy/add-candy}">Add new Product</a></h2>
     </div>
-
-<!--    <sec:authorize access="hasRole('MANAGER')">-->
-<!--        <div><h2><a th:href="@{/candy/add-candy}">Add new Product</a></h2></div>-->
-<!--    </sec:authorize>-->
     <div>
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -29,6 +25,10 @@
                     <th></th>
                     <th></th>
                 </div>
+                <div sec:authorize="hasAnyAuthority('products:read')">
+                    <th></th>
+                </div>
+
 
 
             </tr>
@@ -48,7 +48,9 @@
                     <td sec:authorize="hasAnyAuthority('products:write')">
                         <a th:href="@{'/candy/edit/' + ${I.id}}">Update</a>
                     </td>
-
+                    <td sec:authorize="hasAnyAuthority('products:read')">
+                        <a th:href="@{'/products/'+ ${I.id}+'/bucket'}">Add to bucket</a>
+                    </td>
                 </tr>
             </tr:block>
             </tbody>

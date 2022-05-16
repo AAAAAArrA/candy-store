@@ -104,5 +104,9 @@ public class UserServiceImpl {
         }
     }
 
+    public void save(User user){
+        userRepository.save(user);
+    }
+
 
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Chocolate {
     private Long id;
     private String name;
     private String description;
-    private int price;
+    private BigDecimal price;
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;

@@ -10,9 +10,10 @@
         <tr>
             <td>Menu</td>
             <td><a th:href="@{/}">Home</a></td>
+            <td><a th:href="@{/users/new}">Sign up</a></td>
             <td><a th:href="@{/candy}">Products</a></td>
-<!--            <td><a th:href="@{/login}">Login</a></td>-->
             <td sec:authorize="hasAnyAuthority('users_write')"><a th:href="@{/users}">Users</a></td>
+            <td sec:authorize="isAuthenticated()"><a th:href="@{/bucket}">Bucket</a></td>
         </tr>
     </table>
     <td style="align-self: flex-end">

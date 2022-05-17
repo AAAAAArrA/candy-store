@@ -25,7 +25,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     private String password;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JoinColumn(name = "bucket_ID")
     private Bucket bucket;
 }

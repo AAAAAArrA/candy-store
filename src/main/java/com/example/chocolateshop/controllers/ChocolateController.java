@@ -3,6 +3,8 @@ package com.example.chocolateshop.controllers;
 
 import com.example.chocolateshop.models.Chocolate;
 import com.example.chocolateshop.services.ChocolateService;
+import com.example.chocolateshop.services.SessionObjectHolder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/candy")
 public class ChocolateController {
-    private  final ChocolateService chocolateService;
-    public ChocolateController(ChocolateService chocolateService) {
+    @Value("${server.port:8085}")
+    private int port;
+    private final ChocolateService chocolateService;
+    private final SessionObjectHolder objectHolder;
+    public ChocolateController(ChocolateService chocolateService, SessionObjectHolder objectHolder) {
         this.chocolateService = chocolateService;
+        this.objectHolder = objectHolder;
     }
 
 

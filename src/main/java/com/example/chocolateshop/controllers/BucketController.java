@@ -2,9 +2,8 @@ package com.example.chocolateshop.controllers;
 
 
 import com.example.chocolateshop.dto.BucketDTO;
-import com.example.chocolateshop.repositories.BucketRepository;
 import com.example.chocolateshop.services.BucketService;
-import com.example.chocolateshop.services.ChocolateService;
+import com.example.chocolateshop.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +16,11 @@ import java.security.Principal;
 @RequestMapping("/bucket")
 public class BucketController {
     private final BucketService bucketService;
-    private final BucketRepository  bucketRepository;
-    private final ChocolateService chocolateService;
-    public BucketController(BucketService bucketService, BucketRepository bucketRepository, ChocolateService chocolateService) {
+    private final ProductService productService;
+    public BucketController(BucketService bucketService, ProductService productService) {
         this.bucketService = bucketService;
-        this.bucketRepository = bucketRepository;
-        this.chocolateService = chocolateService;
+        this.productService = productService;
     }
-
-
     @GetMapping
     public String aboutBucket(Model model, Principal principal){
         if(principal == null){
@@ -46,8 +41,8 @@ public class BucketController {
     }
     @GetMapping("/report-1")
     public String bucket(Model model){
-        model.addAttribute("firstReport", bucketRepository.findAll());
-        model.addAttribute("chocolates", chocolateService.chocolateList());
+        model.addAttribute("firstReport", bucketService.getAll());
+        model.addAttribute("chocolates", productService.getAll());
         return "report-1";
 
     }

@@ -1,4 +1,4 @@
-package com.example.chocolateshop.services;
+package com.example.chocolateshop.services.implementation;
 
 import com.example.chocolateshop.models.User;
 import com.example.chocolateshop.repositories.UserRepository;
@@ -26,8 +26,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(user == null){
             throw new UsernameNotFoundException("User not found with name " + username);
         }
-//        List<GrantedAuthority> roles = new ArrayList<>();
-//        roles.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new org.springframework.security.core.userdetails.User(
                 user.getFullName(),
                 user.getPassword(),

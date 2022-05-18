@@ -2,8 +2,7 @@ package com.example.chocolateshop.security;
 
 
 import com.example.chocolateshop.enums.Permission;
-import com.example.chocolateshop.enums.Role;
-import com.example.chocolateshop.services.CustomUserDetailsService;
+import com.example.chocolateshop.services.implementation.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

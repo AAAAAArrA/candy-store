@@ -7,16 +7,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "chocolates")
+@Table(name = "products")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Chocolate {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,6 @@
 package com.example.chocolateshop.dto;
 
-import com.example.chocolateshop.models.Chocolate;
+import com.example.chocolateshop.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +19,7 @@ public class OrderDetailsDTO {
     private BigDecimal amount;
     private Double sum;
 
-    public OrderDetailsDTO(Chocolate chocolate) {
+    public OrderDetailsDTO(Product chocolate) {
         this.title = chocolate.getName();
         this.productId = chocolate.getId();
         this.price = chocolate.getPrice();

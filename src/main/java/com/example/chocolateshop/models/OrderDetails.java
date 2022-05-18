@@ -23,14 +23,14 @@ public class OrderDetails {
     private Order order;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Chocolate chocolate;
+    private Product product;
     private BigDecimal amount;
     private BigDecimal price;
 
-    public OrderDetails(Order order, Chocolate chocolate, Long amount) {
+    public OrderDetails(Order order, Product product, Long amount) {
         this.order = order;
-        this.chocolate = chocolate;
+        this.product = product;
         this.amount = new BigDecimal(amount);
-        this.price = new BigDecimal(String.valueOf(chocolate.getPrice()));
+        this.price = new BigDecimal(String.valueOf(product.getPrice()));
     }
 }

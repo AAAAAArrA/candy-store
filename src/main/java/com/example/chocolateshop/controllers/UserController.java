@@ -3,7 +3,7 @@ package com.example.chocolateshop.controllers;
 
 import com.example.chocolateshop.dto.UserDTO;
 import com.example.chocolateshop.models.User;
-import com.example.chocolateshop.services.UserServiceImpl;
+import com.example.chocolateshop.services.CustomUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +17,15 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private final UserServiceImpl userServiceImpl;
+    private final CustomUserService customUserService;
 
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public UserController(CustomUserService customUserService) {
+        this.customUserService = customUserService;
     }
 
     @GetMapping
     public String userList(Model model){
-        model.addAttribute("user", userServiceImpl.allUsers());
+        model.addAttribute("user", customUserService.allUsers());
         return "users/userList";
     }
 
@@ -37,7 +37,7 @@ public class UserController {
 
     @PostMapping("/new")
     public String saveUser(UserDTO userDTO, Model model){
-        if(userServiceImpl.save(userDTO)){
+        if(customUserService.save(userDTO)){
             return "redirect:/users";
         }else {
             model.addAttribute("user", userDTO);
@@ -47,7 +47,7 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id){
-        userServiceImpl.delete(id);
+        customUserService.delete(id);
         return "redirect:/users";
     }
 
@@ -56,7 +56,7 @@ public class UserController {
         if(principal == null){
             throw new RuntimeException("You are not authorize");
         }
-        User user = userServiceImpl.findUser(principal.getName());
+        User user = customUserService.findUser(principal.getName());
 
         UserDTO userDTO = UserDTO.builder()
                 .userName(user.getFullName())
@@ -77,7 +77,7 @@ public class UserController {
             model.addAttribute("user", dto);
             return "users/profiles";
         }
-        userServiceImpl.updateProfile(dto);
+        customUserService.updateProfile(dto);
         return "redirect:/users/profile";
     }
 }

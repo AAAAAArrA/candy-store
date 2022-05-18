@@ -23,5 +23,5 @@ public class Bucket {
     @JoinTable(name = "buckets_product",
             joinColumns = @JoinColumn(name = "bucket_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Chocolate> chocolateList;
+    private List<Product> chocolateList;
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:tr="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:insert="~{menu.html :: nav-menu}"></div>
+<div class="container text-center">
+    <div><h1>Products</h1></div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>User name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Product</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr:block>
+                <tr th:each="I : ${firstReport}">
+                    <td th:text="${I.user.fullName}"></td>
+                    <td th:text="${I.user.email}"></td>
+                    <td th:text="${I.user.role}"></td>
+                    <td>
+                        <span th:each="C : ${I.chocolateList}">
+                            <span th:text="${C.name}"/>
+                            <a>; </a>
+                            <br/>
+                            <span th:text="${C.price}"/>
+                        </span>
+                    </td>
+                </tr>
+            </tr:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

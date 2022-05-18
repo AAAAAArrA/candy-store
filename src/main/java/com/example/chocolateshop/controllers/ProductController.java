@@ -34,4 +34,5 @@ public class ProductController {
 //        return "redirect:/products";
         return "redirect:/candy";
     }
+
 }

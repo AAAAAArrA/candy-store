@@ -1,11 +1,11 @@
 package com.example.chocolateshop.repositories;
 
-import com.example.chocolateshop.models.Bucket;
+import com.example.chocolateshop.models.OrderDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface BucketRepository extends JpaRepository<Bucket, Long> {
-    List<Bucket> findAll();
+public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Long> {
+    List<OrderDetails> findAll();
 }

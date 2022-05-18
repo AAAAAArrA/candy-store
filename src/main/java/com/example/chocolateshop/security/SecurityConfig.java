@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/users/new","/users/profile").permitAll()
                 .antMatchers(HttpMethod.GET,"/candy/**").hasAuthority(Permission.PRODUCTS_READ.getPermission())
+                .antMatchers(HttpMethod.GET,"/bucket/report-1").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
                 .antMatchers(HttpMethod.POST,"/candy/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
                 .antMatchers(HttpMethod.DELETE,"/candy/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
                 .antMatchers(HttpMethod.GET,"/users/**").hasAuthority(Permission.USERS_READ.getPermission())

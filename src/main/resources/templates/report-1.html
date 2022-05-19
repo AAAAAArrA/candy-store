@@ -27,11 +27,14 @@
                     <td th:text="${I.user.email}"></td>
                     <td th:text="${I.user.role}"></td>
                     <td>
-                        <span th:each="C : ${I.chocolateList}">
-                            <span th:text="${C.name}"/>
+                        <span th:each="C : ${I.details}">
+                            <span th:text="${C.product.name}"/>
                             <a>; </a>
                             <br/>
-                            <span th:text="${C.price}"/>
+                            <span th:text="${C.product.price}"/>
+                            <span th:text="${C.amount}"/>
+                            <a>; </a>
+                            <br/>
                         </span>
                     </td>
                 </tr>

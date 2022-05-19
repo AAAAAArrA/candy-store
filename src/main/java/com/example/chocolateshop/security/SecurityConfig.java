@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/users/new","/users/profile").permitAll()
-                .antMatchers(HttpMethod.GET,"/candy/**").hasAuthority(Permission.PRODUCTS_READ.getPermission())
-                .antMatchers(HttpMethod.GET,"/bucket/report-1").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
-                .antMatchers(HttpMethod.POST,"/candy/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
-                .antMatchers(HttpMethod.DELETE,"/candy/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
+                .antMatchers(HttpMethod.GET,"/products/**").hasAuthority(Permission.PRODUCTS_READ.getPermission())
+                .antMatchers(HttpMethod.GET,"/orders/report-1").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
+                .antMatchers(HttpMethod.POST,"/products/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
+                .antMatchers(HttpMethod.DELETE,"/products/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
                 .antMatchers(HttpMethod.GET,"/users/**").hasAuthority(Permission.USERS_READ.getPermission())
                 .antMatchers(HttpMethod.POST,"/users/**").hasAuthority(Permission.USERS_WRITE.getPermission())
                 .anyRequest().permitAll()
@@ -63,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .csrf().disable();
     }
-
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();

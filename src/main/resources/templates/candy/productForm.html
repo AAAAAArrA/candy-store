@@ -10,7 +10,7 @@
 <div class="container text-center">
     <div th:if="${product.id == null}"><h1>Add new Product</h1></div>
     <div th:unless="${product.id == null}"><h1>Edit Product</h1></div>
-    <form th:method="POST" th:action="@{/candy/save}" th:object="${product}" enctype="multipart/form-data"
+    <form th:method="POST" th:action="@{/products/save}" th:object="${product}" enctype="multipart/form-data"
           style="max-width: 600px; margin: 0 auto;">
         <input type="hidden" th:field="*{id}" th:value="${product.id}"/>
         <div class="m-3">

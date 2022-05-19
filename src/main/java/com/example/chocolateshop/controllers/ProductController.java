@@ -48,10 +48,10 @@ public class ProductController {
     @GetMapping("{id}/bucket")
     public String addBucket(@PathVariable Long id, Principal principal){
         if(principal == null){
-            return "redirect:/candy";
+            return "redirect:/products";
         }
         productService.addToUserBucket(id, principal.getName());
-        return "redirect:/candy";
+        return "redirect:/products";
     }
 
 }

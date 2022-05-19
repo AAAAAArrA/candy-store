@@ -39,11 +39,5 @@ public class BucketController {
         }
         return "redirect:/bucket";
     }
-    @GetMapping("/report-1")
-    public String bucket(Model model){
-        model.addAttribute("firstReport", bucketService.getAll());
-        model.addAttribute("chocolates", productService.getAll());
-        return "report-1";
 
-    }
 }

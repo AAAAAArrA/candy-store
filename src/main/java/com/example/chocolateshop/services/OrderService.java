@@ -9,5 +9,6 @@ import java.util.List;
 public interface OrderService {
     void save(Order order);
     List<Order> getOrderByUser(String name);
+    List<Order> getAllOrders();
 
 }

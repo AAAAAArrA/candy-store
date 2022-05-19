@@ -1,6 +1,5 @@
 package com.example.chocolateshop.services.implementation;
 
-import com.example.chocolateshop.mapper.ProductMapper;
 import com.example.chocolateshop.models.Bucket;
 import com.example.chocolateshop.models.Product;
 import com.example.chocolateshop.models.User;
@@ -20,7 +19,6 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    private final ProductMapper productMapper = ProductMapper.MAPPER;
 
     private final ProductRepository productRepository;
     private final CustomUserService customUserService;

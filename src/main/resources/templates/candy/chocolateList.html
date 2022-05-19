@@ -11,7 +11,7 @@
 <div class="container text-center">
     <div><h1>Products</h1></div>
     <div>
-        <h2 sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/candy/add-candy}">Add new Product</a></h2>
+        <h2 sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/products/add-product}">Add new Product</a></h2>
     </div>
     <div>
         <table class="table table-bordered">

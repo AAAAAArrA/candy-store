@@ -38,7 +38,7 @@ public class BucketServiceImpl implements BucketService {
         Bucket bucket = new Bucket();
         bucket.setUser(user);
         List<Product> chocolateList = getCollectRefProductsById(productIds);
-        bucket.setChocolateList(chocolateList);
+        bucket.setProductList(chocolateList);
         return bucketRepository.save(bucket);
     }
     @Override
@@ -50,10 +50,10 @@ public class BucketServiceImpl implements BucketService {
     }
     @Override
     public void addProduct(Bucket bucket, List<Long> productIds) {
-        List<Product> products = bucket.getChocolateList();
+        List<Product> products = bucket.getProductList();
         List<Product> newProductList = products == null ? new ArrayList<>() : new ArrayList<>(products);
         newProductList.addAll(getCollectRefProductsById(productIds));
-        bucket.setChocolateList(newProductList);
+        bucket.setProductList(newProductList);
         bucketRepository.save(bucket);
     }
     @Override
@@ -64,7 +64,7 @@ public class BucketServiceImpl implements BucketService {
         }
         BucketDTO bucketDTO = new BucketDTO();
         Map<Long, BucketDetailsDTO> mapByProductId = new HashMap<>();
-        List<Product> chocolates = user.getBucket().getChocolateList();
+        List<Product> chocolates = user.getBucket().getProductList();
         for(Product product : chocolates){
             BucketDetailsDTO details = mapByProductId.get(product.getId());
             if(details == null){
@@ -87,13 +87,13 @@ public class BucketServiceImpl implements BucketService {
             throw new RuntimeException("User not found");
         }
         Bucket bucket = user.getBucket();
-        if(bucket==null || bucket.getChocolateList().isEmpty()){
+        if(bucket==null || bucket.getProductList().isEmpty()){
             return;
         }
         Order order = new Order();
         order.setStatus(Status.NEW);
         order.setUser(user);
-        Map<Product, Long> productWithAmount = bucket.getChocolateList().stream()
+        Map<Product, Long> productWithAmount = bucket.getProductList().stream()
                 .collect(Collectors.groupingBy(product -> product, Collectors.counting()));
 
         List<OrderDetails> orderDetails = productWithAmount.entrySet().stream()
@@ -108,7 +108,7 @@ public class BucketServiceImpl implements BucketService {
         order.setAddress("none");
 
         orderService.save(order);
-        bucket.getChocolateList().clear();
+        bucket.getProductList().clear();
         bucketRepository.save(bucket);
     }
 

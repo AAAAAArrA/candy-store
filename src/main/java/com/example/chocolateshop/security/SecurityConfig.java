@@ -42,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/users/new","/users/profile").permitAll()
-                .antMatchers(HttpMethod.GET,"/products/**").hasAuthority(Permission.PRODUCTS_READ.getPermission())
+                .antMatchers("/", "/users/new","/users/profile","/products/page/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/products/**", "/orders/page/**").hasAuthority(Permission.PRODUCTS_READ.getPermission())
                 .antMatchers(HttpMethod.GET,"/orders/report-1").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
                 .antMatchers(HttpMethod.POST,"/products/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())
                 .antMatchers(HttpMethod.DELETE,"/products/**").hasAuthority(Permission.PRODUCTS_WRITE.getPermission())

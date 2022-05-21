@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css}">
 </head>
 <body>
 <div th:insert="~{menu.html :: nav-menu}"></div>
 <div class="container text-center">
     <div><h1>Products</h1></div>
     <div>
-        <h2 sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/products/add-product}">Add new Product</a></h2>
+        <h2 sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/products/add-product}">Add new Product</a>
+        </h2>
     </div>
     <div>
         <table class="table table-bordered">
@@ -32,7 +35,7 @@
             </thead>
             <tbody>
             <tr:block>
-                <tr th:each="I : ${chocolateList}">
+                <tr th:each="I : ${productList}">
                     <td>
                         <img alt="" th:src="*{'data:image/jpeg;base64,'+{I.image}}" height="60px"/>
                     </td>
@@ -52,7 +55,96 @@
             </tr:block>
             </tbody>
         </table>
+        <div th:if="${totalPages > 1}" class="pagination">
+            <div class="row col-sm-10">
+                <div class="col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class="col-sm-1">
+                    <a th:href="@{'/products/page/' + ${1}}">First</a>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage > 1}" th:href="@{'/products/page/' + ${currentPage - 1}}">Previous</a>
+                    <span th:unless="${currentPage > 1}">Previous</span>
+                </div>
+                <div class="col-sm-1">
+                    <th:block th:if="${totalPages <=10}">
+                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span>
+                    </span>
+                    </th:block>
+                    <th:block th:if="${totalPages > 10}">
+                        <th:block th:if="${currentPage <= 5 || currentPage > totalPages - 4}">
+                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span>
+                        </span>
+                            <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${6}}">...</a>
+                            <span th:each="i : ${#numbers.sequence(totalPages - 4, totalPages)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span>
+                        </span>
+                        </th:block>
+                    </th:block>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${currentPage + 1}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${totalPages}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+
+            </div>
+        </div>
+<!--        <ul class="pagination" th:if="${totalPages > 0 }">-->
+<!--            <li>-->
+<!--                <a th:href="@{'/products/page/' + ${1}}">First</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a th:if="${currentPage > 1}" th:href="@{'/products/page/' + ${currentPage - 1}}">Previous</a>-->
+<!--                <span th:unless="${currentPage > 1}">Previous</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <th:block th:if="${totalPages <=10}">-->
+<!--                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">-->
+<!--                        <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>-->
+<!--                        <span th:unless="${currentPage != i}">[[${i}]]</span>-->
+<!--                    </span>-->
+<!--                </th:block>-->
+<!--                <th:block th:if="${totalPages > 10}">-->
+<!--                    <th:block th:if="${currentPage <= 5 || currentPage > totalPages - 4}">-->
+<!--                        <span th:each="i : ${#numbers.sequence(1, 5)}">-->
+<!--                            <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>-->
+<!--                            <span th:unless="${currentPage != i}">[[${i}]]</span>-->
+<!--                        </span>-->
+<!--                        <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${6}}">...</a>-->
+<!--                        <span th:each="i : ${#numbers.sequence(totalPages - 4, totalPages)}">-->
+<!--                            <a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>-->
+<!--                            <span th:unless="${currentPage != i}">[[${i}]]</span>-->
+<!--                        </span>-->
+<!--                    </th:block>-->
+<!--                </th:block>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${currentPage + 1}}">Next</a>-->
+<!--                <span th:unless="${currentPage < totalPages}">Next</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${totalPages}}">Last</a>-->
+<!--                <span th:unless="${currentPage < totalPages}">Last</span>-->
+<!--            </li>-->
+<!--        </ul>-->
+
     </div>
+    <!--                    <li th:each="pageNumber : ${numbers}"-->
+    <!--                    th:class="${pageNumber == chocolateList.number} ? active">-->
+    <!--                        <a th:href="@{'/products?page=' + ${pageNumber}}"-->
+    <!--                        th:text="${pageNumber + 1}"></a>-->
+    <!--                    </li>-->
+
 </div>
 </body>
 </html>

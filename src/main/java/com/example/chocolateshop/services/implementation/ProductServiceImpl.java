@@ -7,13 +7,15 @@ import com.example.chocolateshop.repositories.ProductRepository;
 import com.example.chocolateshop.services.BucketService;
 import com.example.chocolateshop.services.CustomUserService;
 import com.example.chocolateshop.services.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Collections;
-import java.util.List;
 
 
 
@@ -34,11 +36,6 @@ public class ProductServiceImpl implements ProductService {
         product.setImage(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
         return productRepository.save(product);
     }
-
-    @Override
-    public List<Product> getAll() {
-        return productRepository.findAll();
-    }
     @Override
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
@@ -47,6 +44,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProduct(Long id) {
         return productRepository.findById(id).get();
+    }
+
+    @Override
+    public Page<Product> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> getAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override

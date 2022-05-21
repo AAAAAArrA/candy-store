@@ -6,6 +6,9 @@ import com.example.chocolateshop.repositories.OrderDetailsRepository;
 import com.example.chocolateshop.repositories.OrderRepository;
 import com.example.chocolateshop.repositories.UserRepository;
 import com.example.chocolateshop.services.OrderService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +38,20 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public Page<Order> getPaginatedOrdersBuUser(String name, int pageNo, int pageSize) {
+        User user = userRepository.findByFullName(name);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return orderRepository.findAllByUserId(user.getId(), pageable);
+    }
+    @Override
+    public Page<Order> getAllPaginatedOrders(int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return  orderRepository.findAll(pageable);
+    }
+
+
 
 
 }

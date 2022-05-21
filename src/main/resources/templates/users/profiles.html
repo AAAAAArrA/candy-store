@@ -10,7 +10,7 @@
 <div th:insert="~{menu.html :: nav-menu}"></div>
 <div class="container text-center">
     <div>
-        <h2 sec:authorize="isAuthenticated()"><a th:href="@{/orders}">My Orders</a></h2>
+        <h2 sec:authorize="isAuthenticated()"><a th:href="@{/orders/page/1}">My Orders</a></h2>
     </div>
     <form th:method="POST" th:action="@{/users/profile}" th:object="${user}" enctype="multipart/form-data"
           style="max-width: 600px; margin: 0 auto;">

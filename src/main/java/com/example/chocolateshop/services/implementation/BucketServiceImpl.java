@@ -9,6 +9,7 @@ import com.example.chocolateshop.repositories.ProductRepository;
 import com.example.chocolateshop.repositories.UserRepository;
 import com.example.chocolateshop.services.BucketService;
 import com.example.chocolateshop.services.OrderService;
+import com.example.chocolateshop.services.ProductService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

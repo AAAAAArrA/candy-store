@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public interface ProductService {
@@ -17,5 +18,6 @@ public interface ProductService {
     void deleteProduct(Long id);
     Product findProduct(Long id);
     Page<Product> findPaginated(int pageNo, int pageSize);
+    public List<Product> getAll();
 
 }

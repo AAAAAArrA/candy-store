@@ -31,7 +31,9 @@
                     <td th:text="${I.amount}"></td>
                     <td th:text="${I.price}"></td>
                     <td th:text="${I.sum}"></td>
-                    <td>Remove</td>
+                    <td>
+                        <a th:href="@{'/bucket/delete/' + ${I.productId}}">Remove</a>
+                    </td>
                 </tr>
             </tr:block>
             </tbody>

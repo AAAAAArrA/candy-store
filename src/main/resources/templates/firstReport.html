@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:tr="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:insert="~{menu.html :: nav-menu}"></div>
+<div class="container text-center">
+    <div><h1>My orders</h1></div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>
+
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block>
+                <tr th:each="B : ${filtered}">
+                    <td th:text="${B.id}"></td>
+                    <td th:text="${B.created}"></td>
+                    <td>
+                        <span th:each="C : ${B.details}">
+                            <h6>Product name: </h6>
+                            <span th:text="${C.product.name}"/>
+                            <h6>Price: </h6>
+                            <span th:text="${C.price}"/>
+                            <h6>Amount: </h6>
+                            <span th:text="${C.amount}"/>
+                            <br/>
+                        </span>
+                    </td>
+
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

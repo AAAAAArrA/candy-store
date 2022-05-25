@@ -24,15 +24,20 @@ public class Order {
     private Long id;
     @CreationTimestamp
     private LocalDateTime created;
-    @UpdateTimestamp
-    private LocalDateTime updated;
+    private BigDecimal summ;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private BigDecimal summ;
-    private String address;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderDetails> details;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+
+
+
+//    @Enumerated(EnumType.STRING)
+//    private Status status;
+//    @UpdateTimestamp
+//    private LocalDateTime updated;
+//    private String address;
 }

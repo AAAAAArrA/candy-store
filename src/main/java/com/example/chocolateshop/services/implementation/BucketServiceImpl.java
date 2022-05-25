@@ -92,7 +92,7 @@ public class BucketServiceImpl implements BucketService {
             return;
         }
         Order order = new Order();
-        order.setStatus(Status.NEW);
+//        order.setStatus(Status.NEW);
         order.setUser(user);
         Map<Product, Long> productWithAmount = bucket.getProductList().stream()
                 .collect(Collectors.groupingBy(product -> product, Collectors.counting()));
@@ -106,7 +106,7 @@ public class BucketServiceImpl implements BucketService {
                 .mapToDouble(BigDecimal::doubleValue).sum());
         order.setDetails(orderDetails);
         order.setSumm(total);
-        order.setAddress("none");
+//        order.setAddress("none");
 
         orderService.save(order);
         bucket.getProductList().clear();
@@ -117,4 +117,19 @@ public class BucketServiceImpl implements BucketService {
     public List<Bucket> getAll() {
         return bucketRepository.findAll();
     }
+
+//    @Override
+//    public void deleteProductFromBucket(Long id){
+//        bucketRepository.deleteById(id);
+//    }
+//    @Override
+//    public void deleteProductFromBucketByUser(Long id){
+////        User user = userRepository.findByFullName(name);
+////        Bucket bucket = user.getBucket();
+////        List<Product> productList = bucket.getProductList();
+////        bucketRepository.deleteAllProductsById();
+////        bucketRepository.deleteAllProductsById(id);
+//
+//
+//    }
 }

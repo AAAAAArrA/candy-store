@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>product Form</title>
@@ -10,7 +10,7 @@
 <div th:insert="~{menu.html :: nav-menu}"></div>
 <div class="container text-center">
     <div>
-        <h2 sec:authorize="isAuthenticated()"><a th:href="@{/orders/page/1}">My Orders</a></h2>
+        <h2 sec:authorize="hasAnyAuthority('orders_write')"><a th:href="@{/orders/page/1}">My Orders</a></h2>
     </div>
     <form th:method="POST" th:action="@{/users/profile}" th:object="${user}" enctype="multipart/form-data"
           style="max-width: 600px; margin: 0 auto;">

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+        <title>Title</title>
+
+    </head>
+<body>
+<div class="container">
+    <h1>Reports list</h1>
+    <hr>
+    <table class="table table-border table-striped">
+        <form th:action="@{/orders/datesF}" method="post">
+            <thead class="thead-dark"></thead>
+            <tr>
+                <th>Start date</th>
+                <th>End date</th>
+            </tr>
+
+            <tbody>
+            <tr>
+                <td><input type="datetime-local" name="startDate" ></td>
+                <td><input type="datetime-local" name="endDate" ></td>
+            </tr>
+            </tbody>
+            <button type="submit">run</button>
+        </form>
+    </table>
+
+</div>
+
+
+</body>
+</html>
+

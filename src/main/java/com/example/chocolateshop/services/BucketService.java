@@ -10,9 +10,17 @@ import java.util.List;
 @Service
 public interface BucketService {
     Bucket createBucket(User user, List<Long> productIds);
+
     List<Product> getCollectRefProductsById(List<Long> productIds);
-    void addProduct(Bucket  bucket, List<Long> productIds);
+
+    void addProduct(Bucket bucket, List<Long> productIds);
+
     BucketDTO getBucketByUser(String name);
+
     void commitBucketToOrder(String name);
+
     List<Bucket> getAll();
+//    public void deleteProductFromBucket(Long id);
+//    public void deleteProductFromBucketByUser(Long id);
+
 }

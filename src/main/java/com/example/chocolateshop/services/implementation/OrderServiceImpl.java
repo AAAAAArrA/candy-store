@@ -6,11 +6,15 @@ import com.example.chocolateshop.repositories.OrderDetailsRepository;
 import com.example.chocolateshop.repositories.OrderRepository;
 import com.example.chocolateshop.repositories.UserRepository;
 import com.example.chocolateshop.services.OrderService;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -50,6 +54,48 @@ public class OrderServiceImpl implements OrderService {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return  orderRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Order> findFilteredOrders(LocalDateTime start, LocalDateTime end, int pageNo, int pageSize) {
+        return null;
+    }
+
+    @Override
+    public List<Order> findFilteredOrders(LocalDateTime start, LocalDateTime end) {
+        //вытаскивает все
+        List<Order> orders = orderRepository.findAll();
+        List<Order> filteredOrders = new ArrayList<>();
+        for(Order order : orders){
+            if(order.getCreated().isAfter(start) && order.getCreated().isBefore(end)){
+                filteredOrders.add(order);
+            }
+            else {
+                continue;
+            }
+        }
+        return filteredOrders;
+    }
+
+    @Override
+    public Page<Order> findFilteredOrders(LocalDateTime start, LocalDateTime end, int pageNo, int pageSize,
+                                          Pageable pageable){
+//        pageable = PageRequest.of(pageNo - 1, pageSize);
+        List<Order> orders = orderRepository.findAll();
+        List<Order> filteredOrders = new ArrayList<>();
+        for(Order order : orders){
+            if(order.getCreated().isAfter(start) && order.getCreated().isAfter(end)){
+                filteredOrders.add(order);
+            }
+            else {
+                continue;
+            }
+        }
+
+        return (Page<Order>) filteredOrders;
+    }
+
+
+
 
 
 

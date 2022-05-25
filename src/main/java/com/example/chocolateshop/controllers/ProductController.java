@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,6 +20,11 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping
+    public String allProducts(Model model){
+        return findPaginated(1, model);
     }
     @GetMapping("/{id}")
     public String chocolateInfo(@PathVariable Long id, Model model){
@@ -31,13 +37,32 @@ public class ProductController {
         int pageSize = 50;
         Page<Product> page = productService.findPaginated(pageNo, pageSize);
         List<Product> productList = page.getContent();
-
+        List<Product> newProductList = new ArrayList<>();
+        for(Product product : productList){
+            if(product.getEnabled() == 1){
+                newProductList.add(product);
+            }else {
+                continue;
+            }
+        }
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
-        model.addAttribute("productList", productList);
+        model.addAttribute("productList", newProductList);
         return "candy/chocolateList";
     }
+    @GetMapping("/deleted")
+    public String deletedProducts(Model model){
+        List<Product> allProducts = productService.getAll();
+        List<Product> deletedProduct  = new ArrayList<>();
+        for(Product product : allProducts){
+            if(product.getEnabled() == 0){
+                deletedProduct.add(product);
+            }
+        }
+        model.addAttribute("deletedProducts", deletedProduct);
+        return "deleted";
+     }
     @GetMapping("/add-product")
     public String createProduct(Model model){
         model.addAttribute("product", new Product());
@@ -55,12 +80,18 @@ public class ProductController {
         return "candy/productForm";
     }
 
-    @GetMapping("{id}/bucket")
+    @GetMapping("/bucket/{id}")
     public String addBucket(@PathVariable Long id, Principal principal){
         if(principal == null){
             return "redirect:/products";
         }
         productService.addToUserBucket(id, principal.getName());
+        return "redirect:/products";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable("id") Long id){
+        productService.deleteProduct(id);
         return "redirect:/products";
     }
 

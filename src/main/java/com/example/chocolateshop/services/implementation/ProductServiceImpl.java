@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Collections;
-
+import java.util.List;
 
 
 @Service
@@ -33,12 +33,16 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public Product saveProductToDB(Product product, MultipartFile multipartFile)throws IOException{
+        product.setEnabled(1);
         product.setImage(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
         return productRepository.save(product);
     }
     @Override
     public void deleteProduct(Long id){
-        productRepository.deleteById(id);
+        Product product = productRepository.getById(id);
+        product.setEnabled(0);
+        productRepository.save(product);
+//        productRepository.deleteById(id);
     }
 
     @Override
@@ -71,5 +75,9 @@ public class ProductServiceImpl implements ProductService {
         }else{
             bucketService.addProduct(bucket, Collections.singletonList(productId));
         }
+    }
+    @Override
+    public List<Product> getAll(){
+        return productRepository.findAll();
     }
 }

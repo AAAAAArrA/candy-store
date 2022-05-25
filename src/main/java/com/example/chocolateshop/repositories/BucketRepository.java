@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface BucketRepository extends JpaRepository<Bucket, Long> {
     List<Bucket> findAll();
+    void deleteAllProductsById(Long id);
 }

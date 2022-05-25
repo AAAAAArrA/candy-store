@@ -21,6 +21,8 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private int enabled;
+
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
@@ -29,4 +31,5 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
+
 }

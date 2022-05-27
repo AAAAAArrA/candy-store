@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<div th:fragment="nav-menu" style="display: flex ; justify-content: end">
+    <table style="margin: 0 38% 0 0;">
+        <tr>
+            <td>Menu</td>
+            <td><a th:href="@{/}">Home</a></td>
+            <td sec:authorize="!isAuthenticated()"><a th:href="@{/users/new}">Sign up</a></td>
+            <td><a th:href="@{/products/page/1}">Products</a></td>
+            <td sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/products/deleted}">Deleted Products</a></td>
+            <td sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/orders/firstReport}">First</a></td>
+            <td sec:authorize="hasAnyAuthority('products:write')"><a th:href="@{/orders/report-1/1}">Sales</a></td>
+            <td sec:authorize="hasAnyAuthority('users_write')"><a th:href="@{/users}">Users</a></td>
+            <td sec:authorize="hasAnyAuthority('bucket_write')"><a th:href="@{/bucket}">Bucket</a></td>
+        </tr>
+    </table>
+    <td style="align-self: flex-end">
+        <div sec:authorize="isAuthenticated()">
+            <div>
+                Hello, <a th:href="@{/users/profile}"><span sec:authentication="principal.username">Bill</span></a>
+            </div>
+            <div>
+                <a th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <div>
+                Hello, Unknown. Please <a th:href="@{/login}">log in</a>
+            </div>
+        </div>
+    </td>
+</div>
+</body>
+</html>

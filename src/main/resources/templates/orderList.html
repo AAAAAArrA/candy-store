@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:tr="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:insert="~{menu.html :: nav-menu}"></div>
+<div class="container text-center">
+    <div><h1>My orders</h1></div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>
+
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block>
+                <tr th:each="B : ${order}">
+                    <td th:text="${B.id}"></td>
+                    <td th:text="${B.created}"></td>
+                    <td>
+                        <span th:each="C : ${B.details}">
+                            <h6>Product name: </h6>
+                            <span th:text="${C.product.name}"/>
+                            <h6>Price: </h6>
+                            <span th:text="${C.price}"/>
+                            <h6>Amount: </h6>
+                            <span th:text="${C.amount}"/>
+                            <br/>
+                        </span>
+                    </td>
+
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <<div th:if="${totalPages > 1}" class="pagination">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-1">
+                <a th:href="@{'/orders/page/' + ${1}}">First</a>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage > 1}" th:href="@{'/orders/page/' + ${currentPage - 1}}">Previous</a>
+                <span th:unless="${currentPage > 1}">Previous</span>
+            </div>
+            <div class="col-sm-1">
+                <th:block th:if="${totalPages <=10}">
+                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}" th:href="@{'/orders/page/' + ${i}}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span>
+                    </span>
+                </th:block>
+                <th:block th:if="${totalPages > 10}">
+                    <th:block th:if="${currentPage <= 5 || currentPage > totalPages - 4}">
+                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/orders/page/' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span>
+                        </span>
+                        <a th:if="${currentPage != i}" th:href="@{'/orders/page/' + ${6}}">...</a>
+                        <span th:each="i : ${#numbers.sequence(totalPages - 4, totalPages)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/orders/page/' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span>
+                        </span>
+                    </th:block>
+                </th:block>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/orders/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/orders/page/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

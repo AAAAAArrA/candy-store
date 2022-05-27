@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>product Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div th:insert="~{menu.html :: nav-menu}"></div>
+<div class="container text-center">
+    <div th:if="${product.id == null}"><h1>Add new Product</h1></div>
+    <div th:unless="${product.id == null}"><h1>Edit Product</h1></div>
+    <form th:method="POST" th:action="@{/products/save}" th:object="${product}" enctype="multipart/form-data"
+          style="max-width: 600px; margin: 0 auto;">
+        <input type="hidden" th:field="*{id}" th:value="${product.id}"/>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Enter name</label>
+                <div class="col-sm-4">
+                    <input type="text" th:field="${product.name}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Enter description:</label>
+                <div class="col-sm-4">
+                    <input type="text" th:field="${product.description}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Enter price:</label>
+                <div class="col-sm-4">
+                    <input type="number" th:field="${product.price}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="m-3">
+            <div class="form-group row" >
+                <label class="col-form-label col-sm-4">Select photo:</label>
+                <div class="col-sm-4">
+                    <input type="file" name="file" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3">
+            <div th:if="${product.id == null}">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            <div th:unless="${product.id == null}">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+</div>
+</body>
+</html>

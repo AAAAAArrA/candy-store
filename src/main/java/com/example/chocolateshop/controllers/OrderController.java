@@ -13,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,7 +22,6 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderDetailsService orderDetailsService;
     private final ProductServiceImpl productService;
-
     public OrderController(OrderService orderService, OrderDetailsService orderDetailsService, ProductServiceImpl productService) {
         this.orderService = orderService;
         this.orderDetailsService = orderDetailsService;
@@ -88,20 +84,9 @@ public class OrderController {
         List<Order> orders = orderService.findFilteredOrders(startDate, endDate);
         PagedListHolder page = new PagedListHolder(orders);
         page.setPageSize(15);
-//        List<Order> orderList = page.getContent();
         model.addAttribute("filtered", page.getPageList());
         model.addAttribute("currentPage", pageNo);
-//        model.addAttribute("totalPages", page.);
-//        model.addAttribute("totalItems", page.getTotalElements());
         return "firstReport";
     }
-//    @GetMapping("/filter/{start}/{end}")
-//    public String filter(@PathVariable(value = "start") String  start,
-//                         @PathVariable(value = "end") String  end, Model model){
-//        LocalDateTime startDate = LocalDateTime.parse(start);
-//        LocalDateTime endDate = LocalDateTime.parse(end);
-//        List<Order> orders = orderService.findFilteredOrders(startDate, endDate);
-//        model.addAttribute("filtered", orders);
-//        return "firstReport";
-//    }
+
 }

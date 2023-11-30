@@ -90,14 +90,6 @@ public class OrderServiceImpl implements OrderService {
                 continue;
             }
         }
-
         return (Page<Order>) filteredOrders;
     }
-
-
-
-
-
-
-
 }
